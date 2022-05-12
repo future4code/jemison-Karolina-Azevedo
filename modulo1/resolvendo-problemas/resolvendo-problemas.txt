@@ -1,0 +1,9 @@
+Exercício de fixação do conhecimento
+
+Passo 1: Ter atenção no enunciado. Qualquer solução começa em uma boa compreensão do enunciado.
+Passo 2: Retirar informaçãoes relevantes. É necessário aprender a retirar do enunciado as informações que serão utilizadas nos códigos.
+Passo 3: Pensar Entradas e Saídas. Reconhecer os dados que são dados e o que é pedido como retorno.
+Passo 4: Fazer um esquema visual. Utilizar tabelas, fluxogramas ou qualquer esquema que ajude a visualizar melhor o problema.
+Passo 5: Criar código feio.
+Passo 6: Testar força bruta. Verificar se o código criado funciona.
+Passo 7: Refatorar. Melhorar o código da melhor forma, legível e funcionando.
