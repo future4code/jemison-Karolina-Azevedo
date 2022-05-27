@@ -1,0 +1,17 @@
+body{
+    background-color: coral;
+    color:black
+}
+
+a{
+    color:blueviolet;
+    font-size: larger;
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+h1,
+h2,
+h3{
+    color:crimson
+}
