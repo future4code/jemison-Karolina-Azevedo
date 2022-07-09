@@ -28,10 +28,10 @@ function App() {
   
 const listaDeMensagens = mensagem.map((msg, index) =>{
   return (
-    <div key={index}
-     usuario= {msg.usuario}
-      mensagem= {msg.mensagem}
-    />
+    <div key={index}>
+     <span>{msg.usuario}: </span>
+      <span>{msg.mensagem}</span>
+    </div>
   )
 }) 
 
@@ -40,9 +40,9 @@ const listaDeMensagens = mensagem.map((msg, index) =>{
       <Cabecalho><img src={Imagem} alt="Labenu"/><h1>LabZap</h1></Cabecalho>
       <AreaLaranja/>
         <AreaMensagem>
-        {listaDeMensagens}
-          <form>
-            <label/>
+        <p>{listaDeMensagens}</p>
+        <form>
+          <label/>
             <input 
             placeholder='Usuário'
           value={inputNome}
@@ -53,7 +53,7 @@ const listaDeMensagens = mensagem.map((msg, index) =>{
             value={inputMensagem}
             onChange={handleInputMensagem}/>
             <button onClick={addMensagem}>Enviar</button>
-          </form>
+        </form>
         </AreaMensagem>
       <AreaLaranja/>
       <Rodape>Copyright © 2022 Labenu All rights reserved. R. Labenu, 1000. Rio de Janeiro. CEP 00.111-000 </Rodape>
