@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
 
 h1, h2, h3 {
     font-family: 'Open Sans', cursive;
-    color: blue
+    
 }
 
 p{
@@ -23,7 +23,7 @@ p{
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #ffcb16
+    background-color: gray
 }
 
 *{
