@@ -1,15 +1,33 @@
-import { perfil } from './MockDeDados/DadosProfile';
-import { GlobalStyle } from './GlobalStyle';
-import {TelaInicial} from './Telas/TelaInicial/TelaInicial'
+
+import { useState } from 'react';
+import {TelaInicial} from './Components/TelaInicial/TelaInicial'
+import { TelaMatches } from './Components/TelaMatches/TelaMatches';
 
 
-function App() {
+function App(props) {
 
+  const [tela, setTela] = useState ("inicial")
+
+  const trocaDeTela = (tela) => {
+    setTela(tela)
+  }
+
+  const renderizaTela = () => {
+    switch (tela){
+      case "inicial": 
+      return <TelaInicial trocaDeTela={trocaDeTela}/>
+      case "matches":
+        return <TelaMatches trocaDeTela={trocaDeTela}/>
+
+      default:
+        return null;
+    }
+  }
 
   return (
-    <div className="App">
-      <GlobalStyle/>
-     <TelaInicial perfil={perfil}/>
+    <div>
+    
+     {renderizaTela()}
 
     </div>
   );
