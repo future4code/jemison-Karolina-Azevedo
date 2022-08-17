@@ -17,7 +17,7 @@ const navigate = useNavigate();
     return (
       <section>
         <h1>Administrador</h1>
-        <button onClick={criarViagem}>Nova viagem</button>
+        <button onClick={criarViagem}>Criar nova viagem</button>
         <button onClick={sobreViagens}>Sobre viagens</button>
         
       </section>
