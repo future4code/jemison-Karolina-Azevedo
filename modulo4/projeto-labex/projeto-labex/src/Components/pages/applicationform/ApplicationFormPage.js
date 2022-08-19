@@ -2,6 +2,7 @@ import React from "react"
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import { useForm } from "../../hooks/useForm";
+import { ContainerCandidato, FormInscricao } from "./style";
 
 export function ApplicationFormPage() {
 
@@ -22,7 +23,7 @@ export function ApplicationFormPage() {
     const candidatoViagem = (event) => {
         event.preventDefault()
 
-        axios.post("https://us-central1-labenu-apis.cloudfunctions.net/labeX/:aluno/trips/:id/apply",
+        axios.post("https://us-central1-labenu-apis.cloudfunctions.net/labeX/karolina-marques-jemison/trips/:id/apply",
             formCandidatoViagem)
             .then((response) => console.log(response.data))
             .catch((error) => console.log(error.message))
@@ -30,24 +31,24 @@ export function ApplicationFormPage() {
     }
 
     return (
-        <div>
+        <ContainerCandidato>
             <h1> Inscrição para viajar no espaço </h1>
-            <form onSubmit={candidatoViagem}>
+            <FormInscricao onSubmit={candidatoViagem}>
                 <label htmlFor="name"> Nome: </label>
                 <input
                     name="name" 
                     id="name" 
-                    placeholder="Nome"
+                    placeholder=""
                     value={formCandidatoViagem.name}
                     onChange={onChange}
                     type="name" 
                     required 
                 />
-                <label htmlFor="age"> Iadade: </label>
+                <label htmlFor="age"> Idade: </label>
                 <input
                     name="age" 
                     id="age" 
-                    placeholder="Idade"
+                    placeholder=""
                     value={formCandidatoViagem.planet}
                     onChange={onChange}
                     type="number"
@@ -57,7 +58,7 @@ export function ApplicationFormPage() {
                 <input
                     name="applicationText" 
                     id="applicationText" 
-                    placeholder="Descrição"
+                    placeholder=""
                     value={formCandidatoViagem.applicationText}
                     onChange={onChange}
                     type="text" 
@@ -67,7 +68,7 @@ export function ApplicationFormPage() {
                 <input
                     name="profession" 
                     id="profession" 
-                    placeholder="Profissão"
+                    placeholder=""
                     value={formCandidatoViagem.profession}
                     onChange={onChange}
                     type="text"
@@ -77,7 +78,7 @@ export function ApplicationFormPage() {
                 <input
                     name="country" 
                     id="country" 
-                    placeholder="Country"
+                    placeholder=""
                     value={formCandidatoViagem.country}
                     onChange={onChange}
                     type="text"
@@ -85,8 +86,8 @@ export function ApplicationFormPage() {
                 />
                 <button type="submit">Enviar </button> 
                 <button onClick={paginaListaDeViagens}></button>
-            </form>
-        </div>
+            </FormInscricao>
+        </ContainerCandidato>
 
     )
 }
