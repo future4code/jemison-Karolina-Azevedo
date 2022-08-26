@@ -1,10 +1,16 @@
-import React from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import { useForm } from "../../hooks/useForm";
 import { ContainerCandidato, FormInscricao } from "./style";
+import { useRequestData } from "../../hooks/useRequestData";
 
 export function ApplicationFormPage() {
+
+    const [inputTrip, setInputTrip] = useState("")
+    const update = (e) => {
+        setInputTrip(e.target.value)
+    }
 
     const navigate = useNavigate();
 
@@ -12,9 +18,9 @@ export function ApplicationFormPage() {
         navigate("/trips/list")
       }
 
-    const [formCandidatoViagem, onChange] = useForm({ 
+    const {form, onChange, clear} = useForm({ 
     name: "",
-    age: Number,
+    age: "",
     applicationText: "",
     profession: "",
     country: ""
@@ -23,70 +29,86 @@ export function ApplicationFormPage() {
     const candidatoViagem = (event) => {
         event.preventDefault()
 
-        axios.post("https://us-central1-labenu-apis.cloudfunctions.net/labeX/karolina-marques-jemison/trips/:id/apply",
-            formCandidatoViagem)
-            .then((response) => console.log(response.data))
-            .catch((error) => console.log(error.message))
+        const body = {
+            ...form
+        }
+
+        axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/karolina-marques-jemison/trips/${inputTrip}/apply`,
+            body)
+            .then((response) => {alert("Cadastro feito com sucesso!")
+            console.log(response.data)})
+            .catch((error) => {console.log(error.message)})
+
+     clear()
 
     }
+
+    const [trips] = useRequestData("https://us-central1-labenu-apis.cloudfunctions.net/labeX/karolina-marques-jemison/trips")
+    const tripList = trips&&trips.trips.map((item) => {
+        return (
+            <option key={item.id} value={item.id}>
+                {item.name}
+            </option>
+        )
+    })
 
     return (
         <ContainerCandidato>
             <h1> Inscrição para viajar no espaço </h1>
             <FormInscricao onSubmit={candidatoViagem}>
+                <select value={inputTrip} onChange={update}>
+                    <option>Selecione uma viagem</option>
+                    {tripList}
+                </select>
                 <label htmlFor="name"> Nome: </label>
                 <input
                     name="name" 
-                    id="name" 
+                   
                     placeholder=""
-                    value={formCandidatoViagem.name}
+                    value={form.name}
                     onChange={onChange}
                     type="name" 
                     required 
                 />
                 <label htmlFor="age"> Idade: </label>
                 <input
-                    name="age" 
-                    id="age" 
+                    name="age"                  
                     placeholder=""
-                    value={formCandidatoViagem.planet}
+                    value={form.planet}
                     onChange={onChange}
                     type="number"
                     required
                 />
                 <label htmlFor="applicationText"> Por que você deve ser escolhido para uma viagem ao espaço: </label>
                 <input
-                    name="applicationText" 
-                    id="applicationText" 
+                    name="applicationText"                      
                     placeholder=""
-                    value={formCandidatoViagem.applicationText}
+                    value={form.applicationText}
                     onChange={onChange}
                     type="text" 
                     required 
                 />
                 <label htmlFor="profession"> Profissão: </label>
                 <input
-                    name="profession" 
-                    id="profession" 
+                    name="profession"                 
                     placeholder=""
-                    value={formCandidatoViagem.profession}
+                    value={form.profession}
                     onChange={onChange}
                     type="text"
                     required
                 />
                 <label htmlFor="country"> Nacionalidade: </label>
                 <input
-                    name="country" 
-                    id="country" 
+                    name="country"                     
                     placeholder=""
-                    value={formCandidatoViagem.country}
+                    value={form.country}
                     onChange={onChange}
                     type="text"
                     required
                 />
                 <button type="submit">Enviar </button> 
-                <button onClick={paginaListaDeViagens}></button>
             </FormInscricao>
+            <button onClick={paginaListaDeViagens}></button>
         </ContainerCandidato>
 
     )

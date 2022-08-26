@@ -1,7 +1,7 @@
-import axios from "axios";
-import React, { useEffect } from "react"
+import React from "react"
 import { useNavigate } from "react-router-dom";
 import { useProtectedPage } from "../../hooks/useProtectedPage";
+import { useRequestData } from "../../hooks/useRequestData";
 import { ContainerAdm } from "./style";
 
 
@@ -13,37 +13,41 @@ export function AdminHomePage () {
     const paginaHome = () => {
       navigate("/")
     }
-    const paginaListaDeViagens = () => {
-      navigate("/trips/list")
-    }
+   
     const criarViagem = () => {
         navigate("/admin/trips/create")
       }
-      const sobreViagens = () => {
-        navigate("/admin/trips/:id")
+      const sobreViagens = (id) => {
+        navigate(`/admin/trips/${id}`)
       }
 
-      useEffect(() => {
-        const token = localStorage.getItem("token");
-        axios.get("https://us-central1-labenu-apis.cloudfunctions.net/labeX/karolina-marques-jemison/trips",
-        { headers: {
-          auth: token
-        }
-        }).then((response) => {
-          console.log(response.data)
-        }).catch((error) => {
-          console.log("Deu erro", error.response)
-        })
-      }, [])
+      const [viagens, isLoadingViagens, errorViagens] = useRequestData('https://us-central1-labenu-apis.cloudfunctions.net/labeX/karolina-marques-jemison/trips')
+
+      const listaDeViagens = viagens && viagens.trips.map((viagem)=>{
+        return(
+        <div key={viagem.id}>
+          <div onClick={() => sobreViagens(viagem.id) }>
+          <span>
+            {viagem.name}
+          </span>
+          </div>
+          
+          </div>
+      )})
+        
+    
 
       
     return (
       <ContainerAdm>
-        <h1>Administrador</h1>        
-        <button onClick={paginaHome}>Home</button>
-        <button onClick={paginaListaDeViagens}>Lista de viagens</button>
-        <button onClick={criarViagem}>Criar nova viagem</button>
-        <button onClick={sobreViagens}>Sobre viagens</button>        
+        <h1>Administrador</h1>    
+        {/* {listaDeViagens} */}
+        {isLoadingViagens && <p> Carregando  Viagens</p>}    
+        {!isLoadingViagens&& errorViagens&&<p>Ocorreu um erro com as viagens</p>}    
+        {!isLoadingViagens&&viagens&&viagens.trips.length >0 &&listaDeViagens}   
+        {!isLoadingViagens&&viagens&&viagens.trips.length === 0 &&(<p> Não há viagens</p>)}
+        <button onClick={paginaHome}>Home</button>  
+        <button onClick={criarViagem}>Criar nova viagem</button>      
       </ContainerAdm>
     );
   }

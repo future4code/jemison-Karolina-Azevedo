@@ -13,14 +13,14 @@ export function LoginPage() {
         navigate("/")
       }
 
-    const [formLogin, onChange, clear] = useForm({ email: "", password: "" })
+    const {form, onChange, clear} = useForm({ email: "", password: "" })
 
 
     const fazerLogin = (event) => {
         event.preventDefault()
 
         axios.post("https://us-central1-labenu-apis.cloudfunctions.net/labeX/karolina-marques-jemison/login",
-            formLogin)
+            form)
             .then((response) => {
                 localStorage.setItem("token", response.data.token)
                 navigate("/admin/trips/list")
@@ -36,18 +36,16 @@ export function LoginPage() {
             <FormLogin onSubmit={fazerLogin}>
                 <input
                     name="email" //colocar igual a propriedade que está no estado inicial do useForm!!!!!!
-                    id="email" //colocar igual ao htmlFor do label
                     placeholder="E-mail"
-                    value={formLogin.email}
+                    value={form.email}
                     onChange={onChange}
                     type="email" //faz validações de e-mail
                     required //torna campo obrigatório
                 />
                 <input
                     name="password" //colocar igual a propriedade que está no estado inicial do useForm!!!!!!
-                    id="senha" //colocar igual ao htmlFor do label
                     placeholder="Senha"
-                    value={formLogin.password}
+                    value={form.password}
                     onChange={onChange}
                     type="password" //oculta senha
                     pattern="^.{3,}$" //padrão Regex
@@ -55,8 +53,8 @@ export function LoginPage() {
                     required //torna campo obrigatório
                 />
                 <button type="submit">Enviar </button> 
-                <BotaoHome onClick={paginaHome}>Home</BotaoHome>
             </FormLogin>
+            <BotaoHome onClick={paginaHome}>Home</BotaoHome>
         </ContainerLogin>
     )
 }
