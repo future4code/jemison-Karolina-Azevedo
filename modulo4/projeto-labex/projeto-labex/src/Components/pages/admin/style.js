@@ -10,4 +10,9 @@ border-radius: 2vh;
 padding-bottom: 5vh;
 `
 
+export const ListaDeViagens = styled.ul`
+
+
+`
+
 

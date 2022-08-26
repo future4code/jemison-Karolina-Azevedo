@@ -9,6 +9,14 @@ border: solid 0.5vh;
 border-radius: 2vh;
 padding-bottom: 5vh;
 
+button{
+    cursor:pointer;
+}
+`
+
+export const Paginas = styled.div`
+display: flex;
+
 `
 
 

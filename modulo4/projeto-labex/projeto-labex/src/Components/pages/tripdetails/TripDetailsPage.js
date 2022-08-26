@@ -9,27 +9,43 @@ import { ContainerDetalhe } from "./style"
 export function TripDetailsPage () {
     useProtectedPage()
 
-    useParams()
+    const params = useParams()
 
     const navigate = useNavigate()
 
     const paginaHome = () => {
         navigate("/")
       }
+      const headers = {
+        headers: {
+            auth: localStorage.getItem("token")
+        }
+      }
 
+      const [detalhes] = useRequestData(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/karolina-marques-jemison/trip/${params.id}`, headers)
 
-      const [detalhes] = useRequestData('https://us-central1-labenu-apis.cloudfunctions.net/labeX/:aluno/trip/:id')
+            console.log(detalhes)
 
-      const viagensDetalhes = detalhes && detalhes.trips.map((detalhe)=>{
-        return<p>{detalhe.name}</p>
+      const viagensDetalhes = detalhes && detalhes.trip.candidates.map((detalhe)=>{
+        return(
+            <div key={detalhe.id}>
+        <p>{detalhe.name}</p>
+        <p>{detalhe.applicationText}</p>
+        <p>{detalhe.age}</p>
+        <p>{detalhe.profession}</p>
+        <p>{detalhe.country}</p>
+        </div>
+        )
         })
-    
+    console.log(viagensDetalhes)
 
  
     return (
         <ContainerDetalhe>
-            <p>TripDetailsPage</p>
-            {viagensDetalhes}
+            
+            {detalhes && detalhes.trip.candidates.length?viagensDetalhes:<p>
+                sem candidatos pendentes</p>}
+               
             <button onClick={paginaHome}>Home</button> 
         </ContainerDetalhe>
     )

@@ -1,6 +1,6 @@
 import React from "react"
 import { useNavigate } from "react-router-dom";
-import { ContainerHome, Botoes } from "./style";
+import { ContainerHome } from "./style";
 
 
 function HomePage() {
@@ -24,11 +24,11 @@ function HomePage() {
         <div>
         <h1>Home Page</h1>
         </div>
-        <div>
+        <>
         <button onClick={ login }>Login</button>
         <button onClick={ listaViagens }>Lista de viagens</button>
         <button onClick={inscricaoViagem}>Candidate-se a uma viagem</button>
-        </div>
+        </>
       </ContainerHome>
     );
   }

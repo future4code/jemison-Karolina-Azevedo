@@ -14,8 +14,8 @@ export function ApplicationFormPage() {
 
     const navigate = useNavigate();
 
-    const paginaListaDeViagens = () => {
-        navigate("/trips/list")
+    const paginaHome = () => {
+        navigate("/")
       }
 
     const {form, onChange, clear} = useForm({ 
@@ -108,7 +108,7 @@ export function ApplicationFormPage() {
                 />
                 <button type="submit">Enviar </button> 
             </FormInscricao>
-            <button onClick={paginaListaDeViagens}></button>
+            <button onClick={paginaHome}>Home</button>  
         </ContainerCandidato>
 
     )
