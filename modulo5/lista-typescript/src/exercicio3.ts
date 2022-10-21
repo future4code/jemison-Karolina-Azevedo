@@ -13,6 +13,7 @@ function catalogo (
     genero: Genero, 
     nota?: number)
     {
-
-
+return ("nome: " + nome + ", ano de lançamento: " + ano + ", genero: " + genero + ", nota: " + nota)
 }
+
+console.log(catalogo("Duna", 2021, Genero.ACAO, 74))
