@@ -1,0 +1,2 @@
+GET https://viacep.com.br/ws/:cep/json/ 
+Content-Type: application/json
